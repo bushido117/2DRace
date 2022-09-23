@@ -14,9 +14,11 @@
 		72AA6EDA28D873B80047D996 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72AA6ED928D873B80047D996 /* Assets.xcassets */; };
 		72AA6EDD28D873B80047D996 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72AA6EDB28D873B80047D996 /* LaunchScreen.storyboard */; };
 		72AA6EE528D8A65A0047D996 /* GameplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AA6EE428D8A65A0047D996 /* GameplayViewController.swift */; };
+		758D7C582094F92237F24167 /* Pods_2DRaceHW.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7480A5C33D8FB429167B585E /* Pods_2DRaceHW.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3673ADB6632E0BD50CAEA089 /* Pods-2DRaceHW.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-2DRaceHW.release.xcconfig"; path = "Target Support Files/Pods-2DRaceHW/Pods-2DRaceHW.release.xcconfig"; sourceTree = "<group>"; };
 		72AA6ECD28D873B60047D996 /* 2DRaceHW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2DRaceHW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72AA6ED028D873B60047D996 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72AA6ED228D873B60047D996 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +28,8 @@
 		72AA6EDC28D873B80047D996 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72AA6EDE28D873B80047D996 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72AA6EE428D8A65A0047D996 /* GameplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameplayViewController.swift; sourceTree = "<group>"; };
+		7480A5C33D8FB429167B585E /* Pods_2DRaceHW.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_2DRaceHW.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A49193CBE42420AB48E3253 /* Pods-2DRaceHW.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-2DRaceHW.debug.xcconfig"; path = "Target Support Files/Pods-2DRaceHW/Pods-2DRaceHW.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +37,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				758D7C582094F92237F24167 /* Pods_2DRaceHW.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A255BC4F872D6F708FE3BE9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7480A5C33D8FB429167B585E /* Pods_2DRaceHW.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		72AA6EC428D873B60047D996 = {
 			isa = PBXGroup;
 			children = (
 				72AA6ECF28D873B60047D996 /* 2DRaceHW */,
 				72AA6ECE28D873B60047D996 /* Products */,
+				81D8EB7C1EF3D474AB991040 /* Pods */,
+				4A255BC4F872D6F708FE3BE9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,6 +85,15 @@
 			path = 2DRaceHW;
 			sourceTree = "<group>";
 		};
+		81D8EB7C1EF3D474AB991040 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8A49193CBE42420AB48E3253 /* Pods-2DRaceHW.debug.xcconfig */,
+				3673ADB6632E0BD50CAEA089 /* Pods-2DRaceHW.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -77,6 +101,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 72AA6EE128D873B80047D996 /* Build configuration list for PBXNativeTarget "2DRaceHW" */;
 			buildPhases = (
+				72AA6F2828DDACA50047D996 /* ShellScript */,
+				D7516078C063CF2ED03C77E8 /* [CP] Check Pods Manifest.lock */,
 				72AA6EC928D873B60047D996 /* Sources */,
 				72AA6ECA28D873B60047D996 /* Frameworks */,
 				72AA6ECB28D873B60047D996 /* Resources */,
@@ -135,6 +161,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		72AA6F2828DDACA50047D996 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n\n";
+		};
+		D7516078C063CF2ED03C77E8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-2DRaceHW-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		72AA6EC928D873B60047D996 /* Sources */ = {
@@ -286,6 +354,7 @@
 		};
 		72AA6EE228D873B80047D996 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A49193CBE42420AB48E3253 /* Pods-2DRaceHW.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -315,6 +384,7 @@
 		};
 		72AA6EE328D873B80047D996 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3673ADB6632E0BD50CAEA089 /* Pods-2DRaceHW.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

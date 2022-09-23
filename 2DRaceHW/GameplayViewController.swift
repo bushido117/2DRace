@@ -42,8 +42,18 @@ class GameplayViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        roadStripTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(createRoadStrip), userInfo: nil, repeats: true)
-        carsTimer = Timer.scheduledTimer(timeInterval: 0.6, target: self, selector: #selector(createCars), userInfo: nil, repeats: true)
+        roadStripTimer = Timer.scheduledTimer(
+            timeInterval: 0.1,
+            target: self,
+            selector: #selector(createRoadStrip),
+            userInfo: nil,
+            repeats: true)
+        carsTimer = Timer.scheduledTimer(
+            timeInterval: 0.6,
+            target: self,
+            selector: #selector(createCars),
+            userInfo: nil,
+            repeats: true)
     }
     
     @objc func createRoadStrip() {
@@ -65,7 +75,7 @@ class GameplayViewController: UIViewController {
         myCar.center.x = newX
         moveMyCarGesture.setTranslation(CGPoint.zero, in: self.view)
     }
-
+    
     @objc func createCars() {
         let policeCar = UIImageView(image: UIImage(named: "policeCar"))
         policeCar.frame.size = CGSize(width: 50, height: 75)
@@ -104,6 +114,7 @@ class GameplayViewController: UIViewController {
             }
         }
     }
+    
     @objc func backToMenuButtonTap() {
         gameplayVCDelegate?.scoreCounterToVC(scoreCounter)
         dismiss(animated: true)
