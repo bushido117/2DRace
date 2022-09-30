@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7269717528E6437D0026FFB0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7269717428E6437D0026FFB0 /* SettingsViewController.swift */; };
+		7269717728E643980026FFB0 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7269717628E643980026FFB0 /* RecordsViewController.swift */; };
 		72AA6ED128D873B60047D996 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AA6ED028D873B60047D996 /* AppDelegate.swift */; };
 		72AA6ED328D873B60047D996 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AA6ED228D873B60047D996 /* SceneDelegate.swift */; };
 		72AA6ED528D873B60047D996 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AA6ED428D873B60047D996 /* ViewController.swift */; };
@@ -19,6 +21,8 @@
 
 /* Begin PBXFileReference section */
 		3673ADB6632E0BD50CAEA089 /* Pods-2DRaceHW.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-2DRaceHW.release.xcconfig"; path = "Target Support Files/Pods-2DRaceHW/Pods-2DRaceHW.release.xcconfig"; sourceTree = "<group>"; };
+		7269717428E6437D0026FFB0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		7269717628E643980026FFB0 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		72AA6ECD28D873B60047D996 /* 2DRaceHW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 2DRaceHW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72AA6ED028D873B60047D996 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		72AA6ED228D873B60047D996 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 				72AA6ED228D873B60047D996 /* SceneDelegate.swift */,
 				72AA6ED428D873B60047D996 /* ViewController.swift */,
 				72AA6EE428D8A65A0047D996 /* GameplayViewController.swift */,
+				7269717428E6437D0026FFB0 /* SettingsViewController.swift */,
+				7269717628E643980026FFB0 /* RecordsViewController.swift */,
 				72AA6ED628D873B60047D996 /* Main.storyboard */,
 				72AA6ED928D873B80047D996 /* Assets.xcassets */,
 				72AA6EDB28D873B80047D996 /* LaunchScreen.storyboard */,
@@ -212,7 +218,9 @@
 				72AA6ED528D873B60047D996 /* ViewController.swift in Sources */,
 				72AA6ED128D873B60047D996 /* AppDelegate.swift in Sources */,
 				72AA6EE528D8A65A0047D996 /* GameplayViewController.swift in Sources */,
+				7269717528E6437D0026FFB0 /* SettingsViewController.swift in Sources */,
 				72AA6ED328D873B60047D996 /* SceneDelegate.swift in Sources */,
+				7269717728E643980026FFB0 /* RecordsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,9 +13,12 @@ protocol GameplayViewControllerDelegate: AnyObject {
 
 class GameplayViewController: UIViewController {
     weak var gameplayVCDelegate: GameplayViewControllerDelegate?
+//    let settingsVC = SettingsViewController()
     lazy var myCar: UIImageView = {
         let myCar = UIImageView(image: UIImage(named: "myCar"))
+        myCar.tintColor = .white
         myCar.frame = CGRect(x: 15, y: 730, width: 50, height: 75)
+        
         return myCar
     }()
     lazy var moveMyCarGesture: UIPanGestureRecognizer = {
@@ -38,6 +41,7 @@ class GameplayViewController: UIViewController {
         view.addSubview(road)
         view.addSubview(myCar)
         view.addGestureRecognizer(moveMyCarGesture)
+//        settingsVC.myCarPickDelegate = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -119,4 +123,20 @@ class GameplayViewController: UIViewController {
         gameplayVCDelegate?.scoreCounterToVC(scoreCounter)
         dismiss(animated: true)
     }
+//    func myCarPick(_ segmentIndex: Int) {
+//        if segmentIndex == 0 {
+//            myCar.image = UIImage(named: "myCar")
+//        } else {
+//            myCar.image = UIImage(named: "blackCar")
+//        }
+//    }
+//
+//    func enemyCarPick() {
+//
+//    }
+//
+//    func playerNameEnter() {
+//
+//    }
+    
 }
