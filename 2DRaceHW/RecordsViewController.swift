@@ -77,9 +77,14 @@ class RecordsViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }()
         let sortedScoresArray = scoresArray.sorted { $0.score < $1.score }
-        cell.textLabel?.text = cellArray[indexPath.row]
-        + ". "
-        + "\(sortedScoresArray[(sortedScoresArray.count - 1) - indexPath.row].score)"
+        if sortedScoresArray.count >= cellArray.count {
+            cell.textLabel?.text = cellArray[indexPath.row]
+            + ". "
+            + "\(sortedScoresArray[(sortedScoresArray.count - 1) - indexPath.row].score)"
+        } else {
+            cell.textLabel?.text = cellArray[indexPath.row]
+            + ". "
+        }
         return cell
     }
     @objc func backToMenuButtonTap() {
