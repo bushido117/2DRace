@@ -7,18 +7,52 @@
 
 import UIKit
 
-protocol GameplayViewControllerDelegate: AnyObject {
-    func scoreCounterToVC(_ scoreCounter: Int)
+struct Score: Codable {
+    var score: Int
 }
 
 class GameplayViewController: UIViewController {
-    weak var gameplayVCDelegate: GameplayViewControllerDelegate?
-//    let settingsVC = SettingsViewController()
-    lazy var myCar: UIImageView = {
+    var scoresArray: [Score] = {
+        do {
+            let fileURL = try FileManager.default.url(
+                for: .documentDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: true)
+                .appendingPathComponent("score.json")
+            let data = try Data(contentsOf: fileURL)
+            let decoder = JSONDecoder()
+            let scores = try decoder.decode([Score].self, from: data)
+            return scores
+        } catch {
+            print(error.localizedDescription)
+            return []
+        }
+    }()
+    let scoreLabel: UILabel = {
+        let label = UILabel()
+        label.frame = CGRect(x: 30, y: 50, width: 80, height: 65)
+        label.text = "0"
+        label.textAlignment = .center
+        label.font = .boldSystemFont(ofSize: 50)
+        label.textColor = .white
+        label.backgroundColor = .black.withAlphaComponent(0.3)
+        label.layer.cornerRadius = 20
+        label.layer.borderColor = UIColor.black.withAlphaComponent(0.3).cgColor
+        label.layer.borderWidth = 4
+        label.clipsToBounds = true
+        return label
+    }()
+    let myCar: UIImageView = {
         let myCar = UIImageView(image: UIImage(named: "myCar"))
         myCar.tintColor = .white
         myCar.frame = CGRect(x: 15, y: 730, width: 50, height: 75)
-        
+        let segment = UserDefaults.standard.integer(forKey: "myCarSegmentIndex")
+        if segment == 0 {
+            myCar.image = UIImage(named: "myCar")
+        } else {
+            myCar.image = UIImage(named: "blackCar")
+        }
         return myCar
     }()
     lazy var moveMyCarGesture: UIPanGestureRecognizer = {
@@ -26,7 +60,7 @@ class GameplayViewController: UIViewController {
         gesture.addTarget(self, action: #selector(gestureTapped))
         return gesture
     }()
-    lazy var road: UIView = {
+    let road: UIView = {
         let view = UIView()
         view.backgroundColor = .gray
         view.frame = UIScreen.main.bounds
@@ -41,7 +75,7 @@ class GameplayViewController: UIViewController {
         view.addSubview(road)
         view.addSubview(myCar)
         view.addGestureRecognizer(moveMyCarGesture)
-//        settingsVC.myCarPickDelegate = self
+        view.addSubview(scoreLabel)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -64,24 +98,28 @@ class GameplayViewController: UIViewController {
         for i in 1...3 {
             let view = UIView(frame: CGRect(x: 97.5 * Double(i), y: -100, width: 10, height: 40))
                 view.backgroundColor = .white
-            UIView.animate(withDuration: 2) { [unowned self] in
+            UIView.animate(withDuration: 1.65, delay: 0, options: [.curveLinear]) { [unowned self] in
                 view.frame.origin.y += 1100
                 self.road.addSubview(view)
-            } completion: { _ in
-                view.removeFromSuperview()
+                } completion: { _ in
+                    view.removeFromSuperview()
             }
         }
     }
-    
     @objc func gestureTapped() {
         let translation = moveMyCarGesture.translation(in: self.view)
         let newX = myCar.center.x + translation.x
         myCar.center.x = newX
         moveMyCarGesture.setTranslation(CGPoint.zero, in: self.view)
     }
-    
     @objc func createCars() {
         let policeCar = UIImageView(image: UIImage(named: "policeCar"))
+        let segment = UserDefaults.standard.integer(forKey: "enemyCarSegmentIndex")
+        if segment == 0 {
+            policeCar.image = UIImage(named: "policeCar")
+        } else {
+            policeCar.image = UIImage(named: "truck")
+        }
         policeCar.frame.size = CGSize(width: 50, height: 75)
         let trafficLine = Int.random(in: 0...3)
         if trafficLine == 0 {
@@ -114,29 +152,28 @@ class GameplayViewController: UIViewController {
             if policeCar.frame.origin.y > 1100 {
                 policeCar.removeFromSuperview()
                 self?.scoreCounter += 1
+                self?.scoreLabel.text = "\(self?.scoreCounter ?? 0)"
                 intersectsTimer.invalidate()
             }
         }
     }
-    
     @objc func backToMenuButtonTap() {
-        gameplayVCDelegate?.scoreCounterToVC(scoreCounter)
+        scoresArray.append(Score(score: scoreCounter))
+        writeJSON(scores: scoresArray)
         dismiss(animated: true)
     }
-//    func myCarPick(_ segmentIndex: Int) {
-//        if segmentIndex == 0 {
-//            myCar.image = UIImage(named: "myCar")
-//        } else {
-//            myCar.image = UIImage(named: "blackCar")
-//        }
-//    }
-//
-//    func enemyCarPick() {
-//
-//    }
-//
-//    func playerNameEnter() {
-//
-//    }
-    
+    func writeJSON(scores: [Score]) {
+        do {
+            let fileURL = try FileManager.default.url(
+                for: .documentDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: true)
+                .appendingPathComponent("score.json")
+            let encoder = JSONEncoder()
+            try encoder.encode(scoresArray).write(to: fileURL)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }

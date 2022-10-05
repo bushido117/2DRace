@@ -7,8 +7,21 @@
 
 import UIKit
 
-class ViewController: UIViewController, GameplayViewControllerDelegate {
-    var highScore = 0
+class ViewController: UIViewController {
+    let backGroundImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "road"))
+        imageView.contentMode = .scaleToFill
+        imageView.frame = UIScreen.main.bounds
+        return imageView
+    }()
+    let greetingLabel: UILabel = {
+        let label = UILabel()
+        label.frame = CGRect(x: 77, y: 200, width: 250, height: 50)
+        label.text = "Hello, " + (UserDefaults.standard.string(forKey: "playerNickname") ?? "anonymous")
+        label.font = .systemFont(ofSize: 30)
+        label.textAlignment = .center
+        return label
+    }()
     lazy var playButton: UIButton = {
         let button = UIButton()
         button.frame = CGRect(x: 130, y: 300, width: 150, height: 50)
@@ -47,44 +60,29 @@ class ViewController: UIViewController, GameplayViewControllerDelegate {
         button.addTarget(self, action: #selector(settingsButtonTap(_:)), for: .touchUpInside)
         return button
     }()
-    lazy var imageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "road"))
-        imageView.contentMode = .scaleToFill
-        imageView.frame = UIScreen.main.bounds
-        return imageView
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(imageView)
+        view.addSubview(backGroundImageView)
         view.addSubview(playButton)
         view.addSubview(recordsButton)
         view.addSubview(settingsButton)
+        view.addSubview(greetingLabel)
     }
     
     @objc func playButtonTap (_ action: Any) {
         let vc = GameplayViewController()
-        vc.gameplayVCDelegate = self
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }
-    
     @objc func settingsButtonTap (_ action: Any) {
         let vc = SettingsViewController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }
-    
     @objc func recordsButtonTap (_ action: Any) {
         let vc = RecordsViewController()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
-    }
-    
-    func scoreCounterToVC(_ scoreCounter: Int) {
-//        if scoreCounter > highScore {
-//            highScore = scoreCounter
-//            self.recordsLabel.text = "  High score: \(highScore)"
-//        }
     }
 }
