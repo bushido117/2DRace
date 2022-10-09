@@ -44,14 +44,14 @@ class GameplayViewController: UIViewController {
         return label
     }()
     let myCar: UIImageView = {
-        let myCar = UIImageView(image: UIImage(named: "myCar"))
+        let myCar = UIImageView(image: UIImage(named: ProjectImages.sportCarImage))
         myCar.tintColor = .white
         myCar.frame = CGRect(x: 15, y: 730, width: 50, height: 75)
-        let segment = UserDefaults.standard.integer(forKey: "myCarSegmentIndex")
+        let segment = UserDefaults.standard.integer(forKey: UserDefaultsKeys.myCarSegmentIndex)
         if segment == 0 {
-            myCar.image = UIImage(named: "myCar")
+            myCar.image = UIImage(named: ProjectImages.sportCarImage)
         } else {
-            myCar.image = UIImage(named: "blackCar")
+            myCar.image = UIImage(named: ProjectImages.blackCarImage)
         }
         return myCar
     }()
@@ -72,12 +72,15 @@ class GameplayViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        addSubviews()
+    }
+    
+    func addSubviews() {
         view.addSubview(road)
         view.addSubview(myCar)
         view.addGestureRecognizer(moveMyCarGesture)
         view.addSubview(scoreLabel)
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         roadStripTimer = Timer.scheduledTimer(
@@ -113,23 +116,23 @@ class GameplayViewController: UIViewController {
         moveMyCarGesture.setTranslation(CGPoint.zero, in: self.view)
     }
     @objc func createCars() {
-        let policeCar = UIImageView(image: UIImage(named: "policeCar"))
-        let segment = UserDefaults.standard.integer(forKey: "enemyCarSegmentIndex")
+        let policeCar = UIImageView(image: UIImage(named: ProjectImages.policeCarImage))
+        let segment = UserDefaults.standard.integer(forKey: UserDefaultsKeys.enemyCarSegmentIndex)
         if segment == 0 {
-            policeCar.image = UIImage(named: "policeCar")
+            policeCar.image = UIImage(named: ProjectImages.policeCarImage)
         } else {
-            policeCar.image = UIImage(named: "truck")
+            policeCar.image = UIImage(named: ProjectImages.truckImage)
         }
         policeCar.frame.size = CGSize(width: 50, height: 75)
         let trafficLine = Int.random(in: 0...3)
         if trafficLine == 0 {
-            policeCar.frame.origin = CGPoint(x: 15, y: -200)
+            policeCar.frame.origin = CGPoint(x: 15, y: -100)
         } else if trafficLine == 1 {
-            policeCar.frame.origin = CGPoint(x: 125, y: -200)
+            policeCar.frame.origin = CGPoint(x: 125, y: -100)
         } else if trafficLine == 2 {
-            policeCar.frame.origin = CGPoint(x: 222, y: -200)
+            policeCar.frame.origin = CGPoint(x: 222, y: -100)
         } else if trafficLine == 3 {
-            policeCar.frame.origin = CGPoint(x: 320, y: -200)
+            policeCar.frame.origin = CGPoint(x: 320, y: -100)
         }
         self.view.addSubview(policeCar)
         Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { [weak self] intersectsTimer in

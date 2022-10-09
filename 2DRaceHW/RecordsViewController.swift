@@ -7,10 +7,9 @@
 
 import UIKit
 
-
 class RecordsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let backGroundImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "road"))
+    let backgroundImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: ProjectImages.backgroundImage))
         imageView.contentMode = .scaleToFill
         imageView.frame = UIScreen.main.bounds
         return imageView
@@ -18,7 +17,7 @@ class RecordsViewController: UIViewController, UITableViewDelegate, UITableViewD
     let highScoresLabel: UILabel = {
         let label = UILabel()
         label.frame = CGRect(x: 50, y: 100, width: 300, height: 100)
-        label.text = "\(UserDefaults.standard.string(forKey: "playerNickname") ?? "")'s highscores"
+        label.text = "\(UserDefaults.standard.string(forKey: UserDefaultsKeys.playerNickname) ?? "")'s highscores"
         label.font = .systemFont(ofSize: 30)
         label.textAlignment = .center
         return label
@@ -46,14 +45,17 @@ class RecordsViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(backGroundImageView)
-        view.addSubview(backToMenuButton)
-        view.addSubview(highScoresLabel)
-        view.addSubview(highScoresTableView)
+        addSubviews()
         highScoresTableView.delegate = self
         highScoresTableView.dataSource = self
     }
     
+    func addSubviews() {
+        view.addSubview(backgroundImageView)
+        view.addSubview(backToMenuButton)
+        view.addSubview(highScoresLabel)
+        view.addSubview(highScoresTableView)
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         cellArray.count
     }
@@ -77,17 +79,17 @@ class RecordsViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }()
         let sortedScoresArray = scoresArray.sorted { $0.score < $1.score }
-        if sortedScoresArray.count >= cellArray.count {
-            cell.textLabel?.text = cellArray[indexPath.row]
-            + ". "
-            + "\(sortedScoresArray[(sortedScoresArray.count - 1) - indexPath.row].score)"
-        } else {
-            cell.textLabel?.text = cellArray[indexPath.row]
-            + ". "
+        if let scoreNumber = sortedScoresArray[safe: (sortedScoresArray.count - 1) - indexPath.row]?.score {
+            cell.textLabel?.text = cellArray[indexPath.row] + ". " + "\(scoreNumber)"
         }
         return cell
     }
     @objc func backToMenuButtonTap() {
         dismiss(animated: true)
+    }
+}
+extension Collection {
+    subscript (safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
     }
 }

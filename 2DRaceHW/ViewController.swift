@@ -6,10 +6,17 @@
 //
 
 import UIKit
+enum ProjectImages {
+    static let backgroundImage = "road"
+    static let sportCarImage = "sportCar"
+    static let blackCarImage = "blackCar"
+    static let policeCarImage = "policeCar"
+    static let truckImage = "truck"
+}
 
 class ViewController: UIViewController {
-    let backGroundImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "road"))
+    let backgroundImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: ProjectImages.backgroundImage))
         imageView.contentMode = .scaleToFill
         imageView.frame = UIScreen.main.bounds
         return imageView
@@ -17,7 +24,7 @@ class ViewController: UIViewController {
     let greetingLabel: UILabel = {
         let label = UILabel()
         label.frame = CGRect(x: 77, y: 200, width: 250, height: 50)
-        label.text = "Hello, " + (UserDefaults.standard.string(forKey: "playerNickname") ?? "anonymous")
+        label.text = "Hello, " + (UserDefaults.standard.string(forKey: UserDefaultsKeys.playerNickname) ?? "anonymous")
         label.font = .systemFont(ofSize: 30)
         label.textAlignment = .center
         return label
@@ -63,13 +70,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(backGroundImageView)
+        addSubviews()
+    }
+    
+    func addSubviews() {
+        view.addSubview(backgroundImageView)
         view.addSubview(playButton)
         view.addSubview(recordsButton)
         view.addSubview(settingsButton)
         view.addSubview(greetingLabel)
     }
-    
     @objc func playButtonTap (_ action: Any) {
         let vc = GameplayViewController()
         vc.modalPresentationStyle = .fullScreen
