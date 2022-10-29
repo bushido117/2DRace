@@ -8,6 +8,25 @@
 import UIKit
 
 class RecordsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    enum TableViewCellColors: CaseIterable {
+        case red, green, orange, blue, pink
+        
+        var backgroundColor: UIColor {
+            switch self {
+            case .red:
+                return UIColor.red
+            case .green:
+                return UIColor.green
+            case .orange:
+                return UIColor.orange
+            case .blue:
+                return UIColor.blue
+            case .pink:
+                return UIColor.systemPink
+            }
+        }
+    }
+    let identifier = "cell"
     let backgroundImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: ProjectImages.backgroundImage))
         imageView.contentMode = .scaleToFill
@@ -24,8 +43,7 @@ class RecordsViewController: UIViewController, UITableViewDelegate, UITableViewD
     }()
     let highScoresTableView: UITableView = {
         let tableView = UITableView()
-        tableView.frame = CGRect(x: 160, y: 210, width: 70, height: 220)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.frame = CGRect(x: 160, y: 210, width: 100, height: 220)
         return tableView
     }()
     let cellArray = ["1", "2", "3", "4", "5"]
@@ -48,6 +66,7 @@ class RecordsViewController: UIViewController, UITableViewDelegate, UITableViewD
         addSubviews()
         highScoresTableView.delegate = self
         highScoresTableView.dataSource = self
+        highScoresTableView.register(UITableViewCell.self, forCellReuseIdentifier: identifier)
     }
     
     func addSubviews() {
@@ -60,7 +79,8 @@ class RecordsViewController: UIViewController, UITableViewDelegate, UITableViewD
         cellArray.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+        cell.backgroundColor = TableViewCellColors.allCases[indexPath.row].backgroundColor
         let scoresArray: [Score] = {
             do {
                 let fileURL = try FileManager.default.url(
@@ -82,12 +102,18 @@ class RecordsViewController: UIViewController, UITableViewDelegate, UITableViewD
         if let scoreNumber = sortedScoresArray[safe: (sortedScoresArray.count - 1) - indexPath.row]?.score {
             cell.textLabel?.text = cellArray[indexPath.row] + ". " + "\(scoreNumber)"
         }
+        cell.accessoryType = .detailButton
         return cell
+    }
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        backgroundImageView.removeFromSuperview()
+        view.backgroundColor = TableViewCellColors.allCases[indexPath.row].backgroundColor
     }
     @objc func backToMenuButtonTap() {
         dismiss(animated: true)
     }
 }
+
 extension Collection {
     subscript (safe index: Index) -> Element? {
         return indices.contains(index) ? self[index] : nil
